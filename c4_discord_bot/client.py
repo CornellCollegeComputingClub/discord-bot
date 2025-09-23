@@ -37,6 +37,7 @@ class Client(commands.Bot):
             await self.load_extension("c4_discord_bot.cogs.development")
         await self.load_extension("c4_discord_bot.cogs.neofetch")
         await self.load_extension("c4_discord_bot.cogs.washing_machine")
+        await self.load_extension("c4_discord_bot.cogs.admin_bulk_events")
     
     async def load_scheduler(self):
         if environ.get("ENV") == "production" and not bool(environ.get("DISABLE_AUTO_UPDATE", False)):
