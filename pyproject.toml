@@ -3,7 +3,7 @@ name = "c4-discord-bot"
 version = "0.1.0"
 description = ""
 authors = [{ name = "Luna", email = "itsactuallyluna9@gmail.com" }]
-requires-python = "~=3.12"
+requires-python = ">=3.12,<4"
 readme = "README.md"
 dependencies = [
     "discord-py>=2.4.0,<3",
