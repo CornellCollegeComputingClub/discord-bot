@@ -12,6 +12,8 @@ class Client(commands.Bot):
 
     async def on_ready(self):
         print(f"Logged on as {self.user}!")
+        await self.change_presence(activity=None, status=discord.Status.online)
+
 
     async def setup_hook(self):
         await self.load_scheduler()
