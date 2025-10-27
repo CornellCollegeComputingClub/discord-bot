@@ -1,6 +1,7 @@
 from typing import Literal, Optional
 from discord.ext.commands import Cog, Bot
 from discord import Interaction, Embed, app_commands, Attachment, EntityType, PrivacyLevel
+from html import unescape
 import icalendar
 
 class BulkEventCreator(Cog):
@@ -48,8 +49,8 @@ class BulkEventCreator(Cog):
                     await existing_events[event.get('summary').strip()].edit(
                         start_time=event.get('dtstart').dt,
                         end_time=event.get('dtend').dt,
-                        description=str(event.get('description')).strip(),
-                        location=str(event.get('location')).strip() if event.get('location') else "To Be Determined!",
+                        description=unescape(str(event.get('description'))).strip(),
+                        location=unescape(str(event.get('location'))).strip() if event.get('location') else "To Be Determined!",
                         reason=f"Bulk event update via .ics file ({interaction.user})"
                     )
                     continue
