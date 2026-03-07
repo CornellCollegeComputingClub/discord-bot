@@ -15,7 +15,8 @@ class WashingMachine(Cog):
         app_commands.Choice(name="delicate", value="delicate"),
         app_commands.Choice(name="normal", value="normal"),
         app_commands.Choice(name="heavy duty", value="heavy duty"),
-        app_commands.Choice(name="super spin", value="super spin")
+        app_commands.Choice(name="super spin", value="super spin"),
+        app_commands.Choice(name="ludicrous speed", value="ludicrous speed")
     ])
     async def spin_cycle(self, interaction: Interaction, image: Attachment, speed: Optional[str] = "normal", counterclockwise: Optional[bool] = False):
         """Put an image through the spin cycle"""
@@ -27,8 +28,9 @@ class WashingMachine(Cog):
         # 1 rot = 360 degrees
         # delicate = a gentle spin (10rot:30s)
         # normal = a normal spin (50rot:60s)
-        # heavy duty = a heavy spin (100rot:90s)
-        # super spin = a super spin (200rot:120s)
+        # heavy duty = a heavy spin (150rot:60s)
+        # super spin = a super spin (250rot:60s)
+        # ludicrous speed = LUDICROUS (500rot:60s)
         # of course, those ratios should be adjusted so the image doesnt take too long to process
         # since these are all ratios...
         fps = 25
@@ -38,9 +40,11 @@ class WashingMachine(Cog):
         elif speed == "normal":
             rot_per_frame = 50 / (60 * fps)
         elif speed == "heavy duty":
-            rot_per_frame = 100 / (90 * fps)
+            rot_per_frame = 150 / (60 * fps)
         elif speed == "super spin":
-            rot_per_frame = 200 / (120 * fps)
+            rot_per_frame = 250 / (60 * fps)
+        elif speed == "ludicrous speed":
+            rot_per_frame = 500 / (60 * fps)
         degrees_per_frame = rot_per_frame * 360 * (-1 if counterclockwise else 1)
 
         # img = self.spin_image(image, image_to_spin=BytesIO(await image.read()), degrees_per_frame=degrees_per_frame, fps=fps)
@@ -55,21 +59,23 @@ class WashingMachine(Cog):
         app_commands.Choice(name="delicate", value="delicate"),
         app_commands.Choice(name="normal", value="normal"),
         app_commands.Choice(name="heavy duty", value="heavy duty"),
-        app_commands.Choice(name="super spin", value="super spin")
+        app_commands.Choice(name="super spin", value="super spin"),
+        app_commands.Choice(name="ludicrous speed", value="ludicrous speed")
     ])
     async def spin_cycle_person(self, interaction: Interaction, person: Member, speed: Optional[str] = "normal", counterclockwise: Optional[bool] = False):
         """Put a person through the spin cycle"""
         if not person.avatar:
             await interaction.response.send_message("That person doesn't have an avatar!", ephemeral=True)
             return
-        
+         
         await interaction.response.defer(thinking=True)
         # speed is how many how many times it spins
         # 1 rot = 360 degrees
         # delicate = a gentle spin (10rot:30s)
         # normal = a normal spin (50rot:60s)
-        # heavy duty = a heavy spin (100rot:90s)
-        # super spin = a super spin (200rot:120s)
+        # heavy duty = a heavy spin (150rot:60s)
+        # super spin = a super spin (250rot:60s)
+        # ludicrous speed = LUDICROUS (500rot:60s)
         # of course, those ratios should be adjusted so the image doesnt take too long to process
         # since these are all ratios...
         fps = 25
@@ -79,9 +85,11 @@ class WashingMachine(Cog):
         elif speed == "normal":
             rot_per_frame = 50 / (60 * fps)
         elif speed == "heavy duty":
-            rot_per_frame = 100 / (90 * fps)
+            rot_per_frame = 150 / (60 * fps)
         elif speed == "super spin":
-            rot_per_frame = 200 / (120 * fps)
+            rot_per_frame = 250 / (60 * fps)
+        elif speed == "ludicrous speed":
+            rot_per_frame = 500 / (60 * fps)
         degrees_per_frame = rot_per_frame * 360 * (-1 if counterclockwise else 1)
 
         # img = self.spin_image(image, image_to_spin=BytesIO(await image.read()), degrees_per_frame=degrees_per_frame, fps=fps)
